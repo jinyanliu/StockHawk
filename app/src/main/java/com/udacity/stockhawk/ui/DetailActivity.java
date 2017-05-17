@@ -9,18 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.udacity.stockhawk.MyXAxisValueFormatter;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract.Quote;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -52,10 +50,13 @@ public class DetailActivity extends AppCompatActivity {
 
                 List<Entry> entries = new ArrayList<Entry>();
 
+                String[] millisecondsArray = new String[valuePair.length];
+
                 // To add data to the chart, wrap each data object I have into an Entry object.
                 for (int i = 0; i < valuePair.length; i++) {
                     String[] singleValue = valuePair[i].split(",");
-                    entries.add(new Entry(Float.parseFloat(singleValue[0]), Float.parseFloat(singleValue[1])));
+                    entries.add(new Entry(i, Float.parseFloat(singleValue[1])));
+                    millisecondsArray[i] = singleValue[0];
                 }
 
                 // Add entries to dataset
@@ -65,40 +66,33 @@ public class DetailActivity extends AppCompatActivity {
 
                 LineData lineData = new LineData(dataSet);
 
+                chart.setData(lineData);
+
+                /***************
+                 * xAxis Setup *
+                 ***************/
                 XAxis xAxis = chart.getXAxis();
-                xAxis.setAxisLineColor(Color.BLACK);
-                xAxis.setAxisLineWidth(4f);
-                xAxis.setTextSize(12f);
-                xAxis.setTextColor(Color.BLACK);
-                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setEnabled(true);
+                xAxis.setDrawLabels(true);
                 xAxis.setDrawAxisLine(true);
                 xAxis.setDrawGridLines(false);
-                xAxis.setGranularity(1f);
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setTextColor(R.color.colorPrimary);
+                xAxis.setAxisLineColor(R.color.colorPrimary);
+                xAxis.setValueFormatter(new MyXAxisValueFormatter(millisecondsArray));
 
+                /***************
+                 * yAxis Setup *
+                 ***************/
                 YAxis yAxis = chart.getAxisLeft();
-                yAxis.setAxisLineColor(Color.BLACK);
-                yAxis.setAxisLineWidth(4f);
-                yAxis.setTextColor(Color.BLACK);
-                xAxis.setTextSize(12f);
+                yAxis.setEnabled(true);
+                yAxis.setDrawLabels(true);
                 yAxis.setDrawAxisLine(true);
-                yAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-                yAxis.setAxisLineColor(1);
-                yAxis.setGranularity(1f);
                 yAxis.setDrawGridLines(false);
-
+                yAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+                yAxis.setTextColor(R.color.colorPrimary);
+                yAxis.setAxisLineColor(R.color.colorPrimary);
                 chart.getAxisRight().setEnabled(false);
-
-                xAxis.setValueFormatter(new IAxisValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, AxisBase axis) {
-                        Calendar cl = Calendar.getInstance();
-                        cl.setTimeInMillis((long) value);
-                        String date = "" + cl.get(Calendar.DAY_OF_MONTH) + ":" + cl.get(Calendar.MONTH) + ":" + cl.get(Calendar.YEAR);
-                        return date;
-                    }
-                });
-
-                chart.setData(lineData);
 
                 //Refresh
                 chart.invalidate();
@@ -108,8 +102,6 @@ public class DetailActivity extends AppCompatActivity {
 
         // Set title "history" on the detail activity menu bar as activity's title.
         setTitle(mCurrentSymbol + " " + getString(R.string.symbol_history_detail_title));
-
-
     }
 
     private String getCurrentStockHistoryString(String symbol) {
@@ -130,5 +122,4 @@ public class DetailActivity extends AppCompatActivity {
         }
         return history;
     }
-
 }
