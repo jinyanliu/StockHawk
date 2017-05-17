@@ -54,11 +54,14 @@ public class DetailActivity extends AppCompatActivity {
 
                 String[] millisecondsArray = new String[valuePair.length];
 
+                int j = -1;
+
                 // To add data to the chart, wrap each data object I have into an Entry object.
-                for (int i = 0; i < valuePair.length; i++) {
+                for (int i = valuePair.length - 1; i >= 0; i--) {
                     String[] singleValue = valuePair[i].split(",");
-                    entries.add(new Entry(i, Float.parseFloat(singleValue[1])));
-                    millisecondsArray[i] = singleValue[0];
+                    j = j + 1;
+                    entries.add(new Entry(j, Float.parseFloat(singleValue[1])));
+                    millisecondsArray[j] = singleValue[0];
                 }
 
                 // Add entries to dataset
