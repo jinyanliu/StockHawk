@@ -35,4 +35,7 @@
     <!-- Half title of the Detail Activity -->
     <string name="symbol_history_detail_title">History</string>
 
+    <!-- Error Log message when transfer milliseconds to date in MyXAxisValueFormatter. -->
+    <string name="log_date_invalid">Date is invalid.</string>
+
 </resources>

@@ -15,7 +15,8 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.udacity.stockhawk.MyXAxisValueFormatter;
+import com.udacity.stockhawk.utility.MyXAxisValueFormatter;
+import com.udacity.stockhawk.utility.MyYAxisValueFormatter;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract.Quote;
 
@@ -76,10 +77,11 @@ public class DetailActivity extends AppCompatActivity {
                 chart.setExtraOffsets(2f, 8f, 2f, 4f);
 
                 int colorGreen = ContextCompat.getColor(DetailActivity.this, R.color.colorPrimaryDark);
+                int colorRed = ContextCompat.getColor(DetailActivity.this, R.color.colorAccent);
 
                 dataSet.setColor(colorGreen);
                 dataSet.setValueTextColor(colorGreen);
-                dataSet.setCircleColor(colorGreen);
+                dataSet.setCircleColor(colorRed);
 
                 LineData lineData = new LineData(dataSet);
 
@@ -92,7 +94,7 @@ public class DetailActivity extends AppCompatActivity {
                 xAxis.setEnabled(true);
                 xAxis.setDrawLabels(true);
                 xAxis.setDrawAxisLine(true);
-                xAxis.setDrawGridLines(false);
+                xAxis.setDrawGridLines(true);
                 xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
                 xAxis.setTextColor(colorGreen);
                 xAxis.setAxisLineColor(colorGreen);
@@ -113,6 +115,7 @@ public class DetailActivity extends AppCompatActivity {
                 yAxis.setAxisLineColor(colorGreen);
                 yAxis.setTextSize(12f);
                 yAxis.setAxisLineWidth(2f);
+                yAxis.setValueFormatter(new MyYAxisValueFormatter());
 
                 YAxis yAxisRight = chart.getAxisRight();
                 yAxisRight.setEnabled(true);
@@ -124,6 +127,7 @@ public class DetailActivity extends AppCompatActivity {
                 yAxisRight.setAxisLineColor(colorGreen);
                 yAxisRight.setTextSize(12f);
                 yAxisRight.setAxisLineWidth(2f);
+                yAxisRight.setValueFormatter(new MyYAxisValueFormatter());
 
                 //Refresh
                 chart.invalidate();
