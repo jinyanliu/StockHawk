@@ -2,9 +2,9 @@ package com.udacity.stockhawk.ui;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -61,8 +61,10 @@ public class DetailActivity extends AppCompatActivity {
 
                 // Add entries to dataset
                 LineDataSet dataSet = new LineDataSet(entries, mCurrentSymbol + " " + getString(R.string.symbol_history_detail_title));
-                dataSet.setColor(Color.BLACK);
-                dataSet.setValueTextColor(Color.BLACK);
+                int colorGreen = ContextCompat.getColor(DetailActivity.this, R.color.colorPrimaryDark);
+
+                dataSet.setColor(colorGreen);
+                dataSet.setValueTextColor(colorGreen);
 
                 LineData lineData = new LineData(dataSet);
 
@@ -77,8 +79,10 @@ public class DetailActivity extends AppCompatActivity {
                 xAxis.setDrawAxisLine(true);
                 xAxis.setDrawGridLines(false);
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                xAxis.setTextColor(R.color.colorPrimary);
-                xAxis.setAxisLineColor(R.color.colorPrimary);
+                xAxis.setTextColor(colorGreen);
+                xAxis.setAxisLineColor(colorGreen);
+                xAxis.setTextSize(12f);
+                xAxis.setAxisLineWidth(2f);
                 xAxis.setValueFormatter(new MyXAxisValueFormatter(millisecondsArray));
 
                 /***************
@@ -90,8 +94,10 @@ public class DetailActivity extends AppCompatActivity {
                 yAxis.setDrawAxisLine(true);
                 yAxis.setDrawGridLines(false);
                 yAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-                yAxis.setTextColor(R.color.colorPrimary);
-                yAxis.setAxisLineColor(R.color.colorPrimary);
+                yAxis.setTextColor(colorGreen);
+                yAxis.setAxisLineColor(colorGreen);
+                yAxis.setTextSize(12f);
+                yAxis.setAxisLineWidth(2f);
                 chart.getAxisRight().setEnabled(false);
 
                 //Refresh
