@@ -61,13 +61,19 @@ public class DetailActivity extends AppCompatActivity {
                 }
 
                 // Add entries to dataset
-                LineDataSet dataSet = new LineDataSet(entries, mCurrentSymbol + " " + getString(R.string.symbol_history_detail_title));
+                LineDataSet dataSet = new LineDataSet(entries, mCurrentSymbol + " "
+                        + getString(R.string.symbol_history_detail_title));
+
                 // Hide the label of the chart
                 chart.getLegend().setEnabled(false);
 
                 // Hide the description of the chart(default position: right corner of the bottom)
                 Description des = chart.getDescription();
                 des.setEnabled(false);
+
+                // Give offsets to left, top, right, bottom of the chart. otherwise some parts of
+                // the labels are invisible.
+                chart.setExtraOffsets(2f, 4f, 2f, 4f);
 
                 int colorGreen = ContextCompat.getColor(DetailActivity.this, R.color.colorPrimaryDark);
 
