@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -61,6 +62,13 @@ public class DetailActivity extends AppCompatActivity {
 
                 // Add entries to dataset
                 LineDataSet dataSet = new LineDataSet(entries, mCurrentSymbol + " " + getString(R.string.symbol_history_detail_title));
+                // Hide the label of the chart
+                chart.getLegend().setEnabled(false);
+
+                // Hide the description of the chart(default position: right corner of the bottom)
+                Description des = chart.getDescription();
+                des.setEnabled(false);
+
                 int colorGreen = ContextCompat.getColor(DetailActivity.this, R.color.colorPrimaryDark);
 
                 dataSet.setColor(colorGreen);
@@ -78,7 +86,7 @@ public class DetailActivity extends AppCompatActivity {
                 xAxis.setDrawLabels(true);
                 xAxis.setDrawAxisLine(true);
                 xAxis.setDrawGridLines(false);
-                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
                 xAxis.setTextColor(colorGreen);
                 xAxis.setAxisLineColor(colorGreen);
                 xAxis.setTextSize(12f);
@@ -92,17 +100,26 @@ public class DetailActivity extends AppCompatActivity {
                 yAxis.setEnabled(true);
                 yAxis.setDrawLabels(true);
                 yAxis.setDrawAxisLine(true);
-                yAxis.setDrawGridLines(false);
+                yAxis.setDrawGridLines(true);
                 yAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
                 yAxis.setTextColor(colorGreen);
                 yAxis.setAxisLineColor(colorGreen);
                 yAxis.setTextSize(12f);
                 yAxis.setAxisLineWidth(2f);
-                chart.getAxisRight().setEnabled(false);
+
+                YAxis yAxisRight = chart.getAxisRight();
+                yAxisRight.setEnabled(true);
+                yAxisRight.setDrawLabels(true);
+                yAxisRight.setDrawAxisLine(true);
+                yAxisRight.setDrawGridLines(true);
+                yAxisRight.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+                yAxisRight.setTextColor(colorGreen);
+                yAxisRight.setAxisLineColor(colorGreen);
+                yAxisRight.setTextSize(12f);
+                yAxisRight.setAxisLineWidth(2f);
 
                 //Refresh
                 chart.invalidate();
-
             }
         }
 
