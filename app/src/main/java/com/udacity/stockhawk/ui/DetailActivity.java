@@ -73,12 +73,13 @@ public class DetailActivity extends AppCompatActivity {
 
                 // Give offsets to left, top, right, bottom of the chart. otherwise some parts of
                 // the labels are invisible.
-                chart.setExtraOffsets(2f, 4f, 2f, 4f);
+                chart.setExtraOffsets(2f, 8f, 2f, 4f);
 
                 int colorGreen = ContextCompat.getColor(DetailActivity.this, R.color.colorPrimaryDark);
 
                 dataSet.setColor(colorGreen);
                 dataSet.setValueTextColor(colorGreen);
+                dataSet.setCircleColor(colorGreen);
 
                 LineData lineData = new LineData(dataSet);
 
