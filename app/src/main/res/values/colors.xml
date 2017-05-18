@@ -5,4 +5,8 @@
     <color name="colorAccent">#D50000</color>
     <color name="colorPrimaryLight">#C8E6C9</color>
 
+    <!-- Touch selector background grey -->
+    <color name="background_grey">#424242</color>
+    <!-- the activated state color -->
+    <color name="activated">#9E9E9E</color>
 </resources>

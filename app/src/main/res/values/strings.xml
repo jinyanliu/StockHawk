@@ -38,4 +38,10 @@
     <!-- Error Log message when transfer milliseconds to date in MyXAxisValueFormatter. -->
     <string name="log_date_invalid">Date is invalid.</string>
 
+    <!-- Empty Quote Database -->
+    <string name="empty_quote_list">No Stock Information Available</string>
+
+    <!-- Strings related to Widgets -->
+    <string name="title_widget_detail">Stock Details</string>
+
 </resources>
