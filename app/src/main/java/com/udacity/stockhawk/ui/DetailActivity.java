@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -15,10 +16,10 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.udacity.stockhawk.utility.MyXAxisValueFormatter;
-import com.udacity.stockhawk.utility.MyYAxisValueFormatter;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract.Quote;
+import com.udacity.stockhawk.utility.MyXAxisValueFormatter;
+import com.udacity.stockhawk.utility.MyYAxisValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,10 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Retrieve the LineChart defined in activity_detail xml from Detail Activity.
         LineChart chart = (LineChart) findViewById(R.id.history_chart);
@@ -68,8 +73,8 @@ public class DetailActivity extends AppCompatActivity {
                 LineDataSet dataSet = new LineDataSet(entries, mCurrentSymbol + " "
                         + getString(R.string.symbol_history_detail_title));
 
-                // Hide the label of the chart
-                chart.getLegend().setEnabled(false);
+//                // Hide the label of the chart
+//                chart.getLegend().setEnabled(false);
 
                 // Hide the description of the chart(default position: right corner of the bottom)
                 Description des = chart.getDescription();
@@ -137,8 +142,8 @@ public class DetailActivity extends AppCompatActivity {
             }
         }
 
-        // Set title "history" on the detail activity menu bar as activity's title.
-        setTitle(mCurrentSymbol + " " + getString(R.string.symbol_history_detail_title));
+//        // Set title "history" on the detail activity menu bar as activity's title.
+//        setTitle(mCurrentSymbol + " " + getString(R.string.symbol_history_detail_title));
     }
 
     private String getCurrentStockHistoryString(String symbol) {
