@@ -9,18 +9,29 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Binder;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.udacity.stockhawk.R;
+import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.Contract.Quote;
+import com.udacity.stockhawk.data.PrefUtils;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * RemoteViewsService controlling the data being shown in the scrollable weather detail widget
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DetailWidgetRemoteViewsService extends RemoteViewsService {
+
+    private final DecimalFormat dollarFormatWithPlus;
+    private final DecimalFormat dollarFormat;
+    private final DecimalFormat percentageFormat;
 
     public final String TAG = DetailWidgetRemoteViewsService.class.getSimpleName();
 
@@ -38,6 +49,16 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
     static final int INDEX_QUOTE_PRICE = 2;
     static final int INDEX_QUOTE_ABSOLUTE_CHANGE = 3;
     static final int INDEX_QUOTE_PERCENTAGE_CHANGE = 4;
+
+    public DetailWidgetRemoteViewsService() {
+        dollarFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
+        dollarFormatWithPlus = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
+        dollarFormatWithPlus.setPositivePrefix("+$");
+        percentageFormat = (DecimalFormat) NumberFormat.getPercentInstance(Locale.getDefault());
+        percentageFormat.setMaximumFractionDigits(2);
+        percentageFormat.setMinimumFractionDigits(2);
+        percentageFormat.setPositivePrefix("+");
+    }
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -88,11 +109,32 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 RemoteViews views = new RemoteViews(getPackageName(),
                         R.layout.widget_detail_list_item);
                 String symbol = data.getString(INDEX_QUOTE_SYMBOL);
-                String price = data.getString(INDEX_QUOTE_PRICE);
-                String percentage_change = data.getString(INDEX_QUOTE_PERCENTAGE_CHANGE);
                 views.setTextViewText(R.id.widget_symbol, symbol);
+
+                String price = dollarFormat.format(data.getFloat(Contract.Quote.POSITION_PRICE));
                 views.setTextViewText(R.id.widget_price, price);
-                views.setTextViewText(R.id.widget_change, percentage_change);
+
+                float rawAbsoluteChange = data.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE);
+                float percentageChange = data.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE);
+
+                int colorGreen = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
+                int colorRed = ContextCompat.getColor(getApplicationContext(), R.color.colorAccent);
+
+                if (rawAbsoluteChange > 0) {
+                    views.setInt(R.id.widget_change, "setBackgroundColor", colorGreen);
+                } else {
+                    views.setInt(R.id.widget_change, "setBackgroundColor", colorRed);
+                }
+
+                String change = dollarFormatWithPlus.format(rawAbsoluteChange);
+                String percentage = percentageFormat.format(percentageChange / 100);
+
+                if (PrefUtils.getDisplayMode(getApplicationContext())
+                        .equals(getApplicationContext().getString(R.string.pref_display_mode_absolute_key))) {
+                    views.setTextViewText(R.id.widget_change, change);
+                } else {
+                    views.setTextViewText(R.id.widget_change, percentage);
+                }
 
                 final Intent fillIntent = new Intent();
                 fillIntent.putExtra("symbol", symbol);
@@ -124,6 +166,4 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
             }
         };
     }
-
-
 }
