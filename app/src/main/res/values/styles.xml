@@ -22,7 +22,6 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <!-- main activity toolbar style -->
     <style name="Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">?attr/colorPrimary</item>
         <item name="popupTheme">@style/Theme.AppCompat.Light</item>
