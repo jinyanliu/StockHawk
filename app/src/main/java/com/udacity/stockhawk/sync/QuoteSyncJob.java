@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
+import com.udacity.stockhawk.mock.MockUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ import timber.log.Timber;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
-import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
 public final class QuoteSyncJob {
@@ -82,7 +82,13 @@ public final class QuoteSyncJob {
 
                 // WARNING! Don't request historical data for a stock that doesn't exist!
                 // The request will hang forever X_x
-                List<HistoricalQuote> history = stock.getHistory(from, to, Interval.WEEKLY);
+//                List<HistoricalQuote> history = stock.getHistory(from, to, Interval.WEEKLY);
+
+                // Note for reviewer:
+                // Due to the problems with Yahoo API we have commented the line above
+                // and included this one to fetch the history from MockUtils
+                // This should be enough as to develop and review while the API is down
+                List<HistoricalQuote> history = MockUtils.getHistory();
 
                 StringBuilder historyBuilder = new StringBuilder();
 
