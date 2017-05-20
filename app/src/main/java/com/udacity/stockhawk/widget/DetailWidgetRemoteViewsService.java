@@ -56,12 +56,13 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                     data.close();
                 }
                 final long identityToken = Binder.clearCallingIdentity();
+                String orderBy = Quote.COLUMN_SYMBOL + " ASC";
                 data = getContentResolver().query(
                         Quote.URI,
                         QUOTE_COLUMNS,
                         null,
                         null,
-                        null);
+                        orderBy);
                 Binder.restoreCallingIdentity(identityToken);
             }
 
