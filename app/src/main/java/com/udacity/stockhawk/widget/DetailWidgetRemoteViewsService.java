@@ -94,7 +94,7 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 views.setTextViewText(R.id.widget_change, percentage_change);
 
                 final Intent fillIntent = new Intent();
-                fillIntent.setData(Quote.URI);
+                fillIntent.putExtra("symbol", symbol);
                 views.setOnClickFillInIntent(R.id.widget_list_item, fillIntent);
                 return views;
             }
@@ -123,4 +123,6 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
             }
         };
     }
+
+
 }
