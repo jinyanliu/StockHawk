@@ -68,7 +68,6 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
 
             @Override
             public void onCreate() {
-                // Nothing to do
             }
 
             @Override

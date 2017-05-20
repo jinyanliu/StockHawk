@@ -1,5 +1,7 @@
 package com.udacity.stockhawk.ui;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,6 +27,7 @@ import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
 import com.udacity.stockhawk.sync.QuoteSyncJob;
+import com.udacity.stockhawk.widget.DetailWidgetProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -195,8 +198,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             PrefUtils.toggleDisplayMode(this);
             setDisplayModeMenuItemIcon(item);
             adapter.notifyDataSetChanged();
+            int widgetIDs[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), DetailWidgetProvider.class));
+            for (int i : widgetIDs) {
+                AppWidgetManager.getInstance(getApplication()).notifyAppWidgetViewDataChanged(i, R.id.widget_list);
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 }
+
