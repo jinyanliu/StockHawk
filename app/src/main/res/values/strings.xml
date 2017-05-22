@@ -47,4 +47,7 @@
     <string name="a11y_price">Price: <xliff:g id="price">%1$s</xliff:g></string>
     <string name="a11y_percentage_change">Percentage Change: <xliff:g id="percentage_change">%1$s</xliff:g></string>
     <string name="a11y_absolute_change">Absolute Change: <xliff:g id="absolute_change">%1$s</xliff:g></string>
+
+    <string name="percentage_menu_item_talkback_title">Change display mode to percentage change</string>
+    <string name="absolute_menu_item_talkback_title">Change display mode to absolute change</string>
 </resources>
