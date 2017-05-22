@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        android:contentDescription="@string/a11y_fb_button"
         android:onClick="button"
         android:src="@drawable/fab_plus"
         app:borderWidth="0dp"
