@@ -47,8 +47,6 @@
     <string name="toast_message_invalid_stock">Invalid Stock Symbol. Please try another one.</string>
 
     <string name="a11y_fb_button">Add Stock</string>
-    <string name="a11y_percentage_change_menu_item">Percentage Change</string>
-    <string name="a11y_absolute_change_menu_item">Absolute Change</string>
     <string name="a11y_price">Price: <xliff:g id="price">%1$s</xliff:g></string>
     <string name="a11y_percentage_change">Percentage Change: <xliff:g id="percentage_change">%1$s</xliff:g></string>
     <string name="a11y_absolute_change">Absolute Change: <xliff:g id="absolute_change">%1$s</xliff:g></string>

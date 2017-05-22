@@ -11,5 +11,7 @@
     <dimen name="widget_detail_default_height">180dp</dimen>
     <dimen name="widget_detail_min_resize_width">220dp</dimen>
     <dimen name="widget_detail_min_resize_height">@dimen/widget_detail_default_height</dimen>
+    <dimen name="widget_list_item_change_horizontal_margin">3dp</dimen>
+    <dimen name="widget_list_item_horizontal_margin">16dp</dimen>
 
 </resources>

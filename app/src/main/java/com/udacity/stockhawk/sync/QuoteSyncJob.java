@@ -8,8 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
+import android.os.Handler;
 
+import com.udacity.stockhawk.DisplayInvalidStockToast;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
@@ -43,7 +44,7 @@ public final class QuoteSyncJob {
     private QuoteSyncJob() {
     }
 
-    static void getQuotes(Context context) {
+    static void getQuotes(Context context, Handler handler) {
 
         Timber.d("Running sync job");
 
@@ -79,7 +80,8 @@ public final class QuoteSyncJob {
                 String stockString = symbol + ": null";
 
                 if (stock.toString().equals(stockString)) {
-                    Toast.makeText(context, context.getResources().getString(R.string.toast_message_invalid_stock), Toast.LENGTH_SHORT).show();
+                    handler.post(new DisplayInvalidStockToast(context, context.getResources().getString(R.string.toast_message_invalid_stock)));
+                    PrefUtils.removeStock(context, symbol);
                 } else {
                     StockQuote quote = stock.getQuote();
 
@@ -178,4 +180,5 @@ public final class QuoteSyncJob {
             scheduler.schedule(builder.build());
         }
     }
+
 }
