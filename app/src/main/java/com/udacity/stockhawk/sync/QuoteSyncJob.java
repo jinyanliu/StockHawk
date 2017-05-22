@@ -79,7 +79,7 @@ public final class QuoteSyncJob {
                 String stockString = symbol + ": null";
 
                 if (stock.toString().equals(stockString)) {
-                    Toast.makeText(context.getApplicationContext(), context.getApplicationContext().getResources().getString(R.string.toast_message_invalid_stock), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getResources().getString(R.string.toast_message_invalid_stock), Toast.LENGTH_SHORT).show();
                 } else {
                     StockQuote quote = stock.getQuote();
 
@@ -176,10 +176,6 @@ public final class QuoteSyncJob {
             JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
 
             scheduler.schedule(builder.build());
-
-
         }
     }
-
-
 }
