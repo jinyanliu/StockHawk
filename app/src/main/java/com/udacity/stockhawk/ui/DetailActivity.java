@@ -155,9 +155,6 @@ public class DetailActivity extends AppCompatActivity {
                 chart.invalidate();
             }
         }
-
-//        // Set title "history" on the detail activity menu bar as activity's title.
-//        setTitle(mCurrentSymbol + " " + getString(R.string.symbol_history_detail_title));
     }
 
     private String getCurrentStockHistoryString(String symbol) {

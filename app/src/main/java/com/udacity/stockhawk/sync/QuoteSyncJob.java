@@ -10,11 +10,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 
-import com.udacity.stockhawk.DisplayInvalidStockToast;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
 import com.udacity.stockhawk.mock.MockUtils;
+import com.udacity.stockhawk.utility.DisplayInvalidStockToast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public final class QuoteSyncJob {
 
                     // WARNING! Don't request historical data for a stock that doesn't exist!
                     // The request will hang forever X_x
-//                List<HistoricalQuote> history = stock.getHistory(from, to, Interval.WEEKLY);
+                    //List<HistoricalQuote> history = stock.getHistory(from, to, Interval.WEEKLY);
 
                     // Note for reviewer:
                     // Due to the problems with Yahoo API we have commented the line above
@@ -150,7 +150,6 @@ public final class QuoteSyncJob {
         scheduler.schedule(builder.build());
     }
 
-
     public static synchronized void initialize(final Context context) {
 
         schedulePeriodic(context);
@@ -180,5 +179,4 @@ public final class QuoteSyncJob {
             scheduler.schedule(builder.build());
         }
     }
-
 }

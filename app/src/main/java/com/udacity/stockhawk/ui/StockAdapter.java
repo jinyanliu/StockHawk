@@ -93,8 +93,6 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
             holder.change.setText(percentage);
             holder.change.setContentDescription(context.getString(R.string.a11y_percentage_change, percentage));
         }
-
-
     }
 
     @Override

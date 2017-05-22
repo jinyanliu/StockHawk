@@ -1,4 +1,4 @@
-package com.udacity.stockhawk;
+package com.udacity.stockhawk.utility;
 
 import android.content.Context;
 import android.widget.Toast;

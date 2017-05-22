@@ -5,9 +5,9 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical"
     android:orientation="horizontal"
+    android:paddingEnd="@dimen/list_item_quote_horizontal_margin"
     android:paddingLeft="@dimen/list_item_quote_horizontal_margin"
     android:paddingRight="@dimen/list_item_quote_horizontal_margin"
-    android:paddingEnd="@dimen/list_item_quote_horizontal_margin"
     android:paddingStart="@dimen/list_item_quote_horizontal_margin">
 
     <TextView
@@ -39,10 +39,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/percent_change_pill_green"
-            android:paddingLeft="@dimen/list_item_quote_change_horizontal_margin"
-            android:paddingStart="@dimen/list_item_quote_change_horizontal_margin"
             android:paddingEnd="@dimen/list_item_quote_change_horizontal_margin"
+            android:paddingLeft="@dimen/list_item_quote_change_horizontal_margin"
             android:paddingRight="@dimen/list_item_quote_change_horizontal_margin"
+            android:paddingStart="@dimen/list_item_quote_change_horizontal_margin"
             tools:text="100%" />
     </LinearLayout>
 </LinearLayout>

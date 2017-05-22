@@ -145,7 +145,6 @@ public class MockUtils {
         return history;
     }
 
-
     private static HistoricalQuote parseCSVLine(String line) {
         String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
         return new HistoricalQuote("STOCK NAME",
