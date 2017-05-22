@@ -44,4 +44,6 @@
     <!-- Strings related to Widgets -->
     <string name="title_widget_detail">Stock Details</string>
 
+    <string name="toast_message_invalid_stock">Invalid Stock Symbol. Please try another one.</string>
+
 </resources>
