@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -62,22 +63,32 @@ public class DetailActivity extends AppCompatActivity {
 
                 String[] millisecondsArray = new String[valuePair.length];
 
-                int j = -1;
+                boolean isRightToLeft = getResources().getBoolean(R.bool.is_right_to_left);
 
-                // To add data to the chart, wrap each data object I have into an Entry object.
-                for (int i = valuePair.length - 1; i >= 0; i--) {
-                    String[] singleValue = valuePair[i].split(",");
-                    j = j + 1;
-                    entries.add(new Entry(j, Float.parseFloat(singleValue[1])));
-                    millisecondsArray[j] = singleValue[0];
+                if (isRightToLeft == false) {
+                    int j = -1;
+
+                    // To add data to the chart, wrap each data object I have into an Entry object.
+                    for (int i = valuePair.length - 1; i >= 0; i--) {
+                        String[] singleValue = valuePair[i].split(",");
+                        j = j + 1;
+                        entries.add(new Entry(j, Float.parseFloat(singleValue[1])));
+                        millisecondsArray[j] = singleValue[0];
+                    }
+                } else {
+                    for (int i = 0; i < valuePair.length; i++) {
+                        String[] singleValue = valuePair[i].split(",");
+                        entries.add(new Entry(i, Float.parseFloat(singleValue[1])));
+                        millisecondsArray[i] = singleValue[0];
+                    }
                 }
 
                 // Add entries to dataset
                 LineDataSet dataSet = new LineDataSet(entries, mCurrentSymbol + " "
                         + getString(R.string.symbol_history_detail_title));
 
-//                // Hide the label of the chart
-//                chart.getLegend().setEnabled(false);
+                chart.getLegend().setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+                chart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
 
                 // Hide the description of the chart(default position: right corner of the bottom)
                 Description des = chart.getDescription();

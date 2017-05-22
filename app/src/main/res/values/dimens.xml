@@ -1,17 +1,21 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
-
     <dimen name="activity_detail_margin">16dp</dimen>
-
     <dimen name="widget_margin">8dp</dimen>
-
     <dimen name="action_bar_default_height">56dp</dimen>
-
     <dimen name="widget_detail_default_width">250dp</dimen>
     <dimen name="widget_detail_default_height">180dp</dimen>
     <dimen name="widget_detail_min_resize_width">220dp</dimen>
     <dimen name="widget_detail_min_resize_height">@dimen/widget_detail_default_height</dimen>
     <dimen name="widget_list_item_change_horizontal_margin">3dp</dimen>
+    <dimen name="list_item_quote_change_horizontal_margin">3dp</dimen>
     <dimen name="widget_list_item_horizontal_margin">16dp</dimen>
-
+    <dimen name="list_item_quote_horizontal_margin">16dp</dimen>
+    <dimen name="add_stock_dialog_margin_top">16dp</dimen>
+    <dimen name="add_stock_dialog_margin_bottom">4dp</dimen>
+    <dimen name="add_stock_dialog_horizontal_margin">4dp</dimen>
+    <dimen name="fb_button_pressedTranslationZ">12dp</dimen>
+    <dimen name="fb_button_elevation">6dp</dimen>
+    <dimen name="fb_button_border_width">0dp</dimen>
+    <dimen name="fb_button_margin">16dp</dimen>
 </resources>
