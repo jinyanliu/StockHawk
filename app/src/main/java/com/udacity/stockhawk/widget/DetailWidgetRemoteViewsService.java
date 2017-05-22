@@ -112,6 +112,7 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
 
                 String price = dollarFormat.format(data.getFloat(Contract.Quote.POSITION_PRICE));
                 views.setTextViewText(R.id.widget_price, price);
+                views.setContentDescription(R.id.widget_price, getString(R.string.a11y_price, price));
 
                 float rawAbsoluteChange = data.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE);
                 float percentageChange = data.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE);
@@ -131,8 +132,10 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 if (PrefUtils.getDisplayMode(getApplicationContext())
                         .equals(getApplicationContext().getString(R.string.pref_display_mode_absolute_key))) {
                     views.setTextViewText(R.id.widget_change, change);
+                    views.setContentDescription(R.id.widget_change, getString(R.string.a11y_absolute_change, change));
                 } else {
                     views.setTextViewText(R.id.widget_change, percentage);
+                    views.setContentDescription(R.id.widget_change, getString(R.string.a11y_percentage_change, percentage));
                 }
 
                 final Intent fillIntent = new Intent();
