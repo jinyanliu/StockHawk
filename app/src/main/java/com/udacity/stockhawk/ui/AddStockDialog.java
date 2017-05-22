@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +45,16 @@ public class AddStockDialog extends DialogFragment {
                 return true;
             }
         });
+
+        TextView title = new TextView(getActivity());
+        title.setGravity(Gravity.CENTER);
+        title.setText(getString(R.string.dialog_title));
+        builder.setCustomTitle(title);
+
         builder.setView(custom);
 
-        builder.setMessage(getString(R.string.dialog_title));
+        //builder.setMessage(getString(R.string.dialog_title));
+
         builder.setPositiveButton(getString(R.string.dialog_add),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

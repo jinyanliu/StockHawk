@@ -22,9 +22,9 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 android:contentDescription="@string/app_name"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="centerInside"
+                android:scaleType="fitStart"
                 android:src="@drawable/ic_logo" />
         </android.support.v7.widget.Toolbar>
 
