@@ -6,7 +6,8 @@ import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.udacity.stockhawk.R;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by jane on 17-5-17.
@@ -19,15 +20,15 @@ public class MyXAxisValueFormatter implements IAxisValueFormatter {
     private String[] mValues;
 
     public MyXAxisValueFormatter(String[] values) {
-        Calendar cl = Calendar.getInstance();
         String[] labels = new String[values.length];
         for (int i = 0; i < values.length; i++) {
-            cl.setTimeInMillis(Long.parseLong(values[i]));
-            String date = "" + cl.get(Calendar.DAY_OF_MONTH) + "/" + cl.get(Calendar.MONTH) + "/" + cl.get(Calendar.YEAR);
-            if (date == null || date.equals("")) {
+            Date date = new Date();
+            date.setTime(Long.parseLong(values[i]));
+            String formattedDate = new SimpleDateFormat("dd/MM/yy").format(date);
+            if (formattedDate == null || formattedDate.equals("")) {
                 Log.e(TAG, String.valueOf(R.string.log_date_invalid));
             } else {
-                labels[i] = date;
+                labels[i] = formattedDate;
             }
         }
         mValues = labels;
@@ -38,5 +39,4 @@ public class MyXAxisValueFormatter implements IAxisValueFormatter {
         // "value" represents the position of the label on the axis (x or y)
         return mValues[(int) value];
     }
-
 }
