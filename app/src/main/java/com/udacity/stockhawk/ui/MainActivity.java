@@ -96,7 +96,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 String symbol = adapter.getSymbolAtPosition(viewHolder.getAdapterPosition());
                 PrefUtils.removeStock(MainActivity.this, symbol);
                 getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
-                // When deleting a stock in main app, notify widget list to change accordingly.
+                /********************************************************************************
+                 * The action in Manifest file:                                                 *
+                 * <intent-filter>                                                              *
+                 * <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />          *
+                 * <action android:name="com.udacity.stockhawk.ACTION_DATA_UPDATED" />          *
+                 * </intent-filter>                                                             *
+                 * makes sure that the widget changing accordingly with the action of the main  *
+                 * app.                                                                         *
+                 ********************************************************************************/
+                // Otherwise, to double triple check, deleting a stock in main app, notify widget list to change accordingly.
                 int widgetIDs[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), DetailWidgetProvider.class));
                 for (int i : widgetIDs) {
                     AppWidgetManager.getInstance(getApplication()).notifyAppWidgetViewDataChanged(i, R.id.widget_list);
@@ -203,7 +212,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             PrefUtils.toggleDisplayMode(this);
             setDisplayModeMenuItemIcon(item);
             adapter.notifyDataSetChanged();
-            // When changing units in main app, notify widget list to change accordingly.
+            /********************************************************************************
+             * The action in Manifest file:                                                 *
+             * <intent-filter>                                                              *
+             * <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />          *
+             * <action android:name="com.udacity.stockhawk.ACTION_DATA_UPDATED" />          *
+             * </intent-filter>                                                             *
+             * makes sure that the widget changing accordingly with the action of the main  *
+             * app.                                                                         *
+             ********************************************************************************/
+            // Otherwise, to double triple check, changing units in main app, notify widget list to change accordingly.
             int widgetIDs[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), DetailWidgetProvider.class));
             for (int i : widgetIDs) {
                 AppWidgetManager.getInstance(getApplication()).notifyAppWidgetViewDataChanged(i, R.id.widget_list);
