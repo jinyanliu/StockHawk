@@ -79,7 +79,11 @@ public final class QuoteSyncJob {
 
                 String stockString = symbol + ": null";
 
-                if (stock.toString().equals(stockString)) {
+                // If user type in "^&*^*&%*", stock == null
+                // If user type in "DLFJKHFDHE", stock.toString().equals(stockString)
+                // Check here to prevent app crash with invalid input.
+                // android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" in add_stock_dialog.xml (avoid input "&*(&*&" from the beginning)
+                if (stock == null || stock.toString().equals(stockString)) {
                     handler.post(new DisplayInvalidStockToast(context, context.getResources().getString(R.string.toast_message_invalid_stock)));
                     PrefUtils.removeStock(context, symbol);
                 } else {
