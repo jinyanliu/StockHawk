@@ -5,6 +5,7 @@
     <color name="colorAccent">#D50000</color>
     <color name="colorPrimaryLight">#C8E6C9</color>
 
+    <color name="colorText">#424242</color>
     <!-- Touch selector background white -->
     <color name="white">#FFFFFF</color>
     <!-- the activated state color -->
