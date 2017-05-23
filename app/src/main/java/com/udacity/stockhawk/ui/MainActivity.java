@@ -96,6 +96,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 String symbol = adapter.getSymbolAtPosition(viewHolder.getAdapterPosition());
                 PrefUtils.removeStock(MainActivity.this, symbol);
                 getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
+                // When deleting a stock in main app, notify widget list to change accordingly.
+                int widgetIDs[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), DetailWidgetProvider.class));
+                for (int i : widgetIDs) {
+                    AppWidgetManager.getInstance(getApplication()).notifyAppWidgetViewDataChanged(i, R.id.widget_list);
+                }
             }
         }).attachToRecyclerView(stockRecyclerView);
     }
@@ -198,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             PrefUtils.toggleDisplayMode(this);
             setDisplayModeMenuItemIcon(item);
             adapter.notifyDataSetChanged();
+            // When changing units in main app, notify widget list to change accordingly.
             int widgetIDs[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), DetailWidgetProvider.class));
             for (int i : widgetIDs) {
                 AppWidgetManager.getInstance(getApplication()).notifyAppWidgetViewDataChanged(i, R.id.widget_list);
